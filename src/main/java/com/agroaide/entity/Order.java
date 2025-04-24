@@ -44,12 +44,4 @@ public class Order {
 
     private String trackingNumber;
     private LocalDateTime deliveryDate;
-}
-
-public enum OrderStatus {
-    PENDING,
-    CONFIRMED,
-    SHIPPED,
-    DELIVERED,
-    CANCELLED
 } 

@@ -157,3 +157,23 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 For support, email support@agroaide.com or create an issue in the repository. 
+
+## changes lines 
+A comprehensive platform for farmers to sell their crops with features like weather forecasting, payment integration, and admin management.
+
+## Key Technical Achievements
+
+- Implemented secure JWT-based authentication system with role-based access control, ensuring secure user management and data protection
+- Developed real-time weather forecasting integration using OpenWeather API with GPS-based location detection and caching mechanism
+- Integrated Razorpay payment gateway with comprehensive order management system, handling payment verification and transaction security
+- Built scalable RESTful APIs with Spring Boot, implementing efficient database operations using PostgreSQL and JPA for optimal performance
+
+## Features
+
+- User Authentication (Signup/Login)
+- Crop Management (Add, Update, Delete, Search)
+- Weather Forecasting (by city/state or GPS coordinates)
+- Payment Integration (Razorpay)
+- Admin Dashboard
+- Image Upload for Crops
+- PostgreSQL Database Integration
