@@ -46,7 +46,7 @@ public class Order {
     private LocalDateTime deliveryDate;
 }
 
-enum OrderStatus {
+public enum OrderStatus {
     PENDING,
     CONFIRMED,
     SHIPPED,
