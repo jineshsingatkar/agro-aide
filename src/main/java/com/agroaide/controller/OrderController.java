@@ -3,7 +3,7 @@ package com.agroaide.controller;
 import com.agroaide.entity.Order;
 import com.agroaide.entity.OrderStatus;
 import com.agroaide.service.OrderService;
-import com.razorpay.RazorpayException;
+// import com.razorpay.RazorpayException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ public class OrderController {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
             String razorpayOrderId = orderService.createRazorpayOrder(order);
             return ResponseEntity.ok(razorpayOrderId);
-        } catch (RazorpayException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

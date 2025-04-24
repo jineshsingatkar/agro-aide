@@ -1,6 +1,7 @@
 package com.agroaide.service;
 
 import com.agroaide.entity.User;
+import com.agroaide.entity.UserRole;
 import com.agroaide.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

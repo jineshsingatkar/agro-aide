@@ -3,11 +3,11 @@ package com.agroaide.service;
 import com.agroaide.entity.Order;
 import com.agroaide.entity.OrderStatus;
 import com.agroaide.repository.OrderRepository;
-import com.razorpay.RazorpayClient;
-import com.razorpay.RazorpayException;
-import org.json.JSONObject;
+// import com.razorpay.RazorpayClient;
+// import com.razorpay.RazorpayException;
+// import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +19,11 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Value("${razorpay.key.id}")
-    private String razorpayKeyId;
+    // @Value("${razorpay.key.id}")
+    // private String razorpayKeyId;
 
-    @Value("${razorpay.key.secret}")
-    private String razorpayKeySecret;
+    // @Value("${razorpay.key.secret}")
+    // private String razorpayKeySecret;
 
     public Order createOrder(Order order) {
         order.setStatus(OrderStatus.PENDING);
@@ -31,6 +31,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    /* Commented out for future use
     public String createRazorpayOrder(Order order) throws RazorpayException {
         RazorpayClient razorpay = new RazorpayClient(razorpayKeyId, razorpayKeySecret);
         JSONObject options = new JSONObject();
@@ -53,7 +54,7 @@ public class OrderService {
             attributes.put("razorpay_payment_id", paymentId);
             attributes.put("razorpay_signature", signature);
             
-            boolean isValid = razorpay.utility.verifyPaymentSignature(attributes);
+            boolean isValid = com.razorpay.Utils.verifyPaymentSignature(attributes, razorpayKeySecret);
             if (isValid) {
                 Order order = orderRepository.findByRazorpayOrderId(orderId)
                     .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -66,6 +67,28 @@ public class OrderService {
         } catch (Exception e) {
             return false;
         }
+    }
+    */
+
+    // Dummy implementation for testing
+    public String createRazorpayOrder(Order order) {
+        // Generate a dummy order ID
+        String dummyOrderId = "dummy_razorpay_" + System.currentTimeMillis();
+        order.setRazorpayOrderId(dummyOrderId);
+        orderRepository.save(order);
+        return dummyOrderId;
+    }
+
+    // Dummy implementation for testing
+    public boolean verifyPayment(String orderId, String paymentId, String signature) {
+        // For testing, always return true and update order status
+        Order order = orderRepository.findByRazorpayOrderId(orderId)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setRazorpayPaymentId(paymentId);
+        order.setRazorpaySignature(signature);
+        order.setStatus(OrderStatus.CONFIRMED);
+        orderRepository.save(order);
+        return true;
     }
 
     public List<Order> getOrdersByBuyer(Long buyerId) {
